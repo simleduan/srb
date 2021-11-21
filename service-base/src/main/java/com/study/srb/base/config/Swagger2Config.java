@@ -40,4 +40,27 @@ public class Swagger2Config {
                 .contact(new Contact("Helen", "https://blog.csdn.net/fan510988896", "510988896@qq.com"))
                 .build();
     }
+
+    @Bean
+    public Docket apiConfig() {
+
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("api")
+                .apiInfo(apiInfo())
+                .select()
+                //只显示admin路径下的页面
+                .paths(Predicates.and(PathSelectors.regex("/api/.*")))
+                .build();
+
+    }
+
+    private ApiInfo apiInfo() {
+
+        return new ApiInfoBuilder()
+                .title("尚融宝-API文档")
+                .description("本文档描述了尚融宝接口")
+                .version("1.0")
+                .contact(new Contact("Helen", "https://blog.csdn.net/fan510988896", "510988896@qq.com"))
+                .build();
+    }
 }
